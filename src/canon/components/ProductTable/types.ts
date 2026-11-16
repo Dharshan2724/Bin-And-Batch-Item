@@ -45,7 +45,8 @@ export interface ProductColumn {
    *
    * `tone` says what the action's state is, not how it looks: `attention` is
    * work still to do (a warning glyph), `done` is work that is complete (a
-   * tick). Both are `text/primary-text`, because both are links.
+   * tick). Both are `text/primary-text`, because both are links. No `tone`
+   * is a plain link with no glyph — "Recent Transactions" on a Rate cell.
    */
   cellAction?: (row: ProductRow) => ProductCellAction | null;
 }
@@ -53,6 +54,8 @@ export interface ProductColumn {
 export interface ProductCellAction {
   label: string;
   tone?: 'attention' | 'done';
+  /** Button's `attention` halo — the one next step on the screen. */
+  highlight?: boolean;
   onSelect: () => void;
 }
 

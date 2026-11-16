@@ -8,8 +8,9 @@ import { ItemDetailsPanel } from './ItemDetailsPanel';
 
 /**
  * SALES → INVOICES → NEW INVOICE, with the Item Details panel open on the
- * line's item (the screenshot). Picking an item on a line opens its panel;
- * "Item Details" above the table reopens it for the last line touched.
+ * line's item (the screenshot). **Recent Transactions** in a line's Rate cell
+ * is the panel's trigger, as in the product; it glows while the panel is
+ * closed, so it reads as the next step.
  *
  * The panel's Transactions tab is where the feature lives: each invoice entry
  * has **View Inventory Details** under "Discount exclusive of tax", and the
@@ -46,7 +47,6 @@ export function InvoiceWithBins({ onCancel, onSaved }: InvoiceWithBinsProps) {
   const [rows, setRows] = useState<ProductRow[]>(initial);
   //  Opens on the first line, as in the screenshot.
   const [panelRow, setPanelRow] = useState<string | null>(initial[0].id);
-  const [lastRow, setLastRow] = useState<string | null>(initial[0].id);
   const [error, setError] = useState<string | null>(null);
 
   const qtyOf = (r: ProductRow) => Number(r.values?.qty || 0);
@@ -61,20 +61,16 @@ export function InvoiceWithBins({ onCancel, onSaved }: InvoiceWithBinsProps) {
   });
 
   const onRowsChange = (next: ProductRow[]) => {
-    let picked: string | null = null;
     const filled = next.map((r) => {
       const before = rows.find((p) => p.id === r.id);
       const item = itemById(r.values?.item);
       if (item && before?.values?.item !== item.id) {
-        picked = r.id;
         return { ...r, values: { ...r.values, rate: String(item.rate), qty: r.values?.qty || '1' } };
       }
-      if (before && JSON.stringify(before.values) !== JSON.stringify(r.values)) setLastRow(r.id);
       return r;
     });
     setRows(withDerived(filled));
     setError(null);
-    if (picked) { setPanelRow(picked); setLastRow(picked); }
   };
 
   const changeWarehouse = (w: string) => {
@@ -89,7 +85,15 @@ export function InvoiceWithBins({ onCancel, onSaved }: InvoiceWithBinsProps) {
     { id: 'item', label: 'Item Details', kind: 'select', width: 260, min: 180, options: ITEM_OPTIONS, placeholder: 'Type or click to select an item' },
     { id: 'qty', label: 'Quantity', kind: 'input', width: 100, min: 80, format: 'numeric', placeholder: '1.00' },
     { id: 'stock', label: 'Stock on Hand', kind: 'read-only', width: 170, min: 130, muted: true },
-    { id: 'rate', label: 'Rate', kind: 'input', width: 100, min: 80, format: 'decimal', placeholder: '0.00' },
+    {
+      id: 'rate', label: 'Rate', kind: 'input', width: 250, min: 240, format: 'decimal', placeholder: '0.00',
+      //  The panel's trigger. Only a line with an item has transactions.
+      cellAction: (r) => (itemById(r.values?.item) ? {
+        label: 'Recent Transactions',
+        highlight: !panelRow,
+        onSelect: () => setPanelRow(r.id),
+      } : null),
+    },
     { id: 'discount', label: 'Discount', kind: 'input', width: 100, min: 80, format: 'decimal', placeholder: '0.00' },
     { id: 'amount', label: 'Amount', kind: 'read-only', width: 120, min: 100, flex: true },
   ];
@@ -107,8 +111,6 @@ export function InvoiceWithBins({ onCancel, onSaved }: InvoiceWithBinsProps) {
 
   const panel = rows.find((r) => r.id === panelRow);
   const panelItem = panel ? itemById(panel.values?.item) : undefined;
-  const reopenId = rows.find((r) => r.id === lastRow && itemById(r.values?.item))?.id
-    ?? rows.find((r) => itemById(r.values?.item))?.id;
 
   return (
     <>
@@ -163,17 +165,6 @@ export function InvoiceWithBins({ onCancel, onSaved }: InvoiceWithBinsProps) {
 
           <ProductTable
             title="Item Table"
-            titleTrailing={reopenId ? (
-              <Button
-                emphasis="secondary" size="sm" icon="info"
-                //  Glows while the panel is closed — the panel is where the
-                //  bin, batch and serial details live, so it is the next step.
-                attention={!panel}
-                onClick={() => setPanelRow(reopenId)}
-              >
-                Item Details
-              </Button>
-            ) : null}
             columns={columns}
             rows={withDerived(rows)}
             onRowsChange={onRowsChange}

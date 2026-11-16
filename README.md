@@ -26,8 +26,9 @@ Live: https://rithika-rajesh-19203.github.io/File-12-Bin-batch-details-at-transa
 | 4. Other tracking | Pick *Wireless Barcode Scanner* (serial tracked) or *Packing Tape 48mm* (bins only) on a line. The panel opens on that item and the dialog shows serials, or bins only. | `stock.ts` |
 | 5. Past invoices | Earlier invoices below the current one carry their own details. Untick *Show only … transactions* to see other customers'. | `stock.ts` (`PAST_INVOICES`) |
 
-**Item Details** above the item table reopens the panel. While the panel is
-closed, the button glows, so it reads as the next step. For a long list, open
+**Recent Transactions** in a line's **Rate** cell opens the panel, as in the
+product. While the panel is closed, the link glows so it reads as the next step.
+For a long list, open
 **INV-000008** (10 lb over 6 batches in 3 bins): the dialog caps at 320px and
 scrolls under a fixed header, with a fade at the bottom while more is below. Anything outside the flow
 raises a *"Not a part of this prototype"* toast.
@@ -42,6 +43,9 @@ raises a *"Not a part of this prototype"* toast.
 - **`SidePanel`**: with `modal={false}` the panel now stacks above the TopBar
   and ProductTable's lane controls (`z-150`). Before, the sticky bar covered its
   header.
+- **`ProductTable`** `cellAction` gained `highlight` (the same glow), and an
+  action with no `tone` is now a plain link with no glyph. That's how Recent
+  Transactions is drawn.
 - **`Button`** gained `attention`: a breathing primary glow and a primary
   border, for the one next step on a screen. It's off under reduced motion,
   where only the border shows. Story: **Button → Attention**.

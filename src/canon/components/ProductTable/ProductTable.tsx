@@ -576,13 +576,20 @@ export function ProductTable({
                                       'shrink-0 inline-flex items-center gap-2 max-w-3/5',
                                       'text-body-sm font-medium text-primary-text hover:underline',
                                       'rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
+                                      //  `highlight` — Button's `attention` halo, for
+                                      //  the link that is the next step.
+                                      a.highlight && 'px-2 animate-attention motion-reduce:animate-none',
                                     )}
                                   >
-                                    <Icon
-                                      name={a.tone === 'done' ? 'check-circle' : 'alert-triangle'}
-                                      size="sm"
-                                      tone={a.tone === 'done' ? 'success' : 'warning'}
-                                    />
+                                    {/* No tone, no glyph: a plain link ("Recent
+                                        Transactions") has no state to report. */}
+                                    {a.tone ? (
+                                      <Icon
+                                        name={a.tone === 'done' ? 'check-circle' : 'alert-triangle'}
+                                        size="sm"
+                                        tone={a.tone === 'done' ? 'success' : 'warning'}
+                                      />
+                                    ) : null}
                                     <span className="truncate">{a.label}</span>
                                   </button>
                                 );
