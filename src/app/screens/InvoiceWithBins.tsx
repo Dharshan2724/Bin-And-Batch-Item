@@ -12,7 +12,7 @@ import { ItemDetailsPanel } from './ItemDetailsPanel';
  * "Item Details" above the table reopens it for the last line touched.
  *
  * The panel's Transactions tab is where the feature lives: each invoice entry
- * has **View Bin and Batch details** under "Discount exclusive of tax", and the
+ * has **View Inventory Details** under "Discount exclusive of tax", and the
  * current invoice's details are computed from this table — its quantity and
  * the Warehouse chosen above.
  */

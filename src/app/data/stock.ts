@@ -7,7 +7,7 @@
  *
  * When an invoice line asks for a quantity, `allocate` decides which stock it
  * takes — earliest expiry first for batches (FEFO), then bin order — and that
- * allocation is what "View Bin and Batch details" shows for the current
+ * allocation is what "View Inventory Details" shows for the current
  * invoice. Past invoices carry the allocation they were saved with.
  */
 

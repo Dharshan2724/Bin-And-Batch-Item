@@ -10,7 +10,7 @@ import { BinBatchDetails } from './BinBatchDetails';
  * ITEM DETAILS — the right-hand panel an invoice line opens, as in the
  * screenshot. The Transactions tab lists the item's invoices, the current one
  * first; under each entry's "Discount exclusive of tax" sits
- * **View Bin and Batch details**, a Toggletip with the bins, batches and serial
+ * **View Inventory Details**, a Toggletip with the bins, batches and serial
  * numbers that invoice takes for this item.
  *
  * The current invoice's details come live from the item table — change the
@@ -119,7 +119,7 @@ export function ItemDetailsPanel({ open, onClose, item, line }: ItemDetailsPanel
                     </Stack>
                     <Inline justify="end">
                       <Toggletip
-                        label="View Bin and Batch details"
+                        label="View Inventory Details"
                         title="Bin & Batch details"
                         subtitle={`${e.number} · ${item.name} · ${qty2(e.qty)} ${item.unit} · ${e.warehouse}`}
                       >

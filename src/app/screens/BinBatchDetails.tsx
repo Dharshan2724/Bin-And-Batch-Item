@@ -3,7 +3,7 @@ import { qty2 } from '../data/stock';
 import type { Allocation, StockItem } from '../data/stock';
 
 /**
- * The body of "View Bin and Batch details" — what one invoice line takes from
+ * The body of "View Inventory Details" — what one invoice line takes from
  * stock, GROUPED BY BIN: each bin and its total, then the batches (or serial
  * numbers) picked from that bin beneath it. A bin can hold several batches,
  * so the bin is the parent and the batch the child — the way a picker walks

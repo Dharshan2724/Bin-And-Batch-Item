@@ -33,7 +33,7 @@ import { cn } from '../../utils/cn';
  * trigger, flipped above when there is no room, clamped 4px inside the viewport.
  */
 export interface ToggletipProps {
-  /** The trigger's text — "View Bin and Batch details". */
+  /** The trigger's text — "View Inventory Details". */
   label: string;
   /** The panel's heading. Also its accessible name. */
   title: string;

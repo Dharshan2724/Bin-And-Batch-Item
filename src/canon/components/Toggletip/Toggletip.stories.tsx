@@ -13,7 +13,7 @@ const meta = {
   title: 'Components/Toggletip', component: Toggletip,
   parameters: { layout: 'centered' },
   args: {
-    label: 'View Bin and Batch details',
+    label: 'View Inventory Details',
     title: 'Bin & batch details',
     subtitle: 'a Product - 2 · 3 lb · Warehouse 1',
     children: null,

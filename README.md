@@ -2,7 +2,7 @@
 
 A clickable prototype for Zoho Inventory: when an invoice line's item is open in
 the **Item Details** panel, every invoice on its **Transactions** tab gets a
-**View Bin and Batch details** link under *Discount exclusive of tax*. Clicking
+**View Inventory Details** link under *Discount exclusive of tax*. Clicking
 it opens a tooltip-style dialog listing what that invoice takes for the item,
 **grouped by bin**: each bin with its total, then the **batches** (or **serial
 numbers**) picked from it. Built on the ZF Design Cannon, from the
@@ -19,7 +19,7 @@ npm run canon    # → http://localhost:6012 — the canon (Storybook)
 | Step | What to try | File |
 | --- | --- | --- |
 | 1. New Invoice | Opens with *a Product - 2* on line 1 and its Item Details panel open on **Transactions**. | `src/app/screens/InvoiceWithBins.tsx` |
-| 2. View the details | Under the current invoice (INV-000009, DRAFT), click **View Bin and Batch details**. | `ItemDetailsPanel.tsx`, `BinBatchDetails.tsx` |
+| 2. View the details | Under the current invoice (INV-000009, DRAFT), click **View Inventory Details**. | `ItemDetailsPanel.tsx`, `BinBatchDetails.tsx` |
 | 3. Change the line | Change the **Quantity** (try 3 or 4) or the **Warehouse**, then reopen it. The bins and batches are re-picked, earliest expiry first. Anything beyond stock is flagged. | `src/app/data/stock.ts` (`allocate`) |
 | 4. Other tracking | Pick *Wireless Barcode Scanner* (serial tracked) or *Packing Tape 48mm* (bins only) on a line. The panel opens on that item and the dialog shows serials, or bins only. | `stock.ts` |
 | 5. Past invoices | Earlier invoices below the current one carry their own details. Untick *Show only … transactions* to see other customers'. | `stock.ts` (`PAST_INVOICES`) |
