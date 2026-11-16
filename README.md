@@ -3,8 +3,9 @@
 A clickable prototype for Zoho Inventory: when an invoice line's item is open in
 the **Item Details** panel, every invoice on its **Transactions** tab gets a
 **View Bin and Batch details** link under *Discount exclusive of tax*. Clicking
-it opens a tooltip-style dialog listing the **bins**, **batches** and **serial
-numbers** that invoice takes for the item. Built on the ZF Design Cannon, from the
+it opens a tooltip-style dialog listing what that invoice takes for the item,
+**grouped by bin**: each bin with its total, then the **batches** (or **serial
+numbers**) picked from it. Built on the ZF Design Cannon, from the
 New Invoice → Item Details → Transactions screenshot.
 
 ```bash
