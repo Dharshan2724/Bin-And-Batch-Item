@@ -23,7 +23,7 @@ Live: https://rithika-rajesh-19203.github.io/File-12-Bin-batch-details-at-transa
 | 1. New Invoice | Opens with *a Product - 2* on line 1 and its Item Details panel open on **Transactions**. | `src/app/screens/InvoiceWithBins.tsx` |
 | 2. View the details | Under the current invoice (INV-000009, DRAFT), click **View Inventory Details**. | `ItemDetailsPanel.tsx`, `BinBatchDetails.tsx` |
 | 3. Change the line | Change the **Quantity** (try 3 or 4) or the **Warehouse**, then reopen it. The bins and batches are re-picked, earliest expiry first. Anything beyond stock is flagged. | `src/app/data/stock.ts` (`allocate`) |
-| 4. Other tracking | Pick *Wireless Barcode Scanner* (serial tracked) or *Packing Tape 48mm* (bins only) on a line. The panel opens on that item and the dialog shows serials, or bins only. | `stock.ts` |
+| 4. Other tracking | Pick *Wireless Barcode Scanner* (serial tracked) or *Packing Tape 48mm* (bins only) on a line, then click its **Recent Transactions**. The dialog shows serials, or bins only. | `stock.ts` |
 | 5. Past invoices | Earlier invoices below the current one carry their own details. Untick *Show only … transactions* to see other customers'. | `stock.ts` (`PAST_INVOICES`) |
 
 **Recent Transactions** in a line's **Rate** cell opens the panel, as in the
