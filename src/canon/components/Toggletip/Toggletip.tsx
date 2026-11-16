@@ -66,26 +66,47 @@ export function Toggletip({
 
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+  const body = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState<{ top: number; left: number; maxHeight: number } | null>(null);
+  //  More content below the fold — draws the fade at the body's foot so a long
+  //  list of bins or batches does not look like it ends at the panel's edge
+  //  (macOS hides scrollbars until you scroll).
+  const [more, setMore] = useState(false);
   const panelId = useId();
   const titleId = useId();
 
   //  Rendered at −9999 first, measured, then placed — the position cannot be
   //  known until the panel exists to be measured. Same as Menu.
+  //
+  //  The HEIGHT is placed too, not only the position. The panel's natural
+  //  height is its header plus the body's full content, capped at
+  //  `chrome/toggletip-h`; if that does not fit below the trigger it flips
+  //  above, and if it fits on neither side it takes the roomier side and caps
+  //  itself to the space there. The body is the only scroller, so the header
+  //  and its close control never scroll away.
   useLayoutEffect(() => {
     if (!open) { setPos(null); return undefined; }
-    const place = () => {
+    const place = (e?: Event) => {
+      //  The panel's own body scrolling must not re-place the panel.
+      if (e?.target instanceof Node && panel.current?.contains(e.target)) return;
       const t = trigger.current?.getBoundingClientRect();
       const p = panel.current;
-      if (!t || !p) return;
+      const b = body.current;
+      if (!t || !p || !b) return;
+      const cap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zf-chrome-toggletip-h')) || 320;
+      const chrome = p.offsetHeight - b.clientHeight;
+      const natural = Math.min(cap, chrome + b.scrollHeight);
       const w = p.offsetWidth;
-      const h = p.offsetHeight;
       const below = t.bottom + GAP;
-      const flip = below + h > window.innerHeight && t.top - GAP - h > 0;
+      const roomBelow = window.innerHeight - below - GAP;
+      const roomAbove = t.top - 2 * GAP;
+      const up = natural > roomBelow && (natural <= roomAbove || roomAbove > roomBelow);
+      const maxHeight = Math.max(0, Math.min(natural, up ? roomAbove : roomBelow));
       const wanted = align === 'start' ? t.left : t.right - w;
       setPos({
-        top: flip ? t.top - GAP - h : below,
+        top: up ? t.top - GAP - maxHeight : below,
         left: Math.min(Math.max(GAP, wanted), Math.max(GAP, window.innerWidth - w - GAP)),
+        maxHeight,
       });
     };
     place();
@@ -96,6 +117,12 @@ export function Toggletip({
       window.removeEventListener('resize', place);
     };
   }, [open, align]);
+
+  const checkMore = () => {
+    const b = body.current;
+    if (b) setMore(b.scrollTop + b.clientHeight < b.scrollHeight - 1);
+  };
+  useLayoutEffect(() => { if (open && pos) checkMore(); }, [open, pos, children]);
 
   //  Focus follows the panel in once it has a position, so it is announced.
   useEffect(() => {
@@ -172,8 +199,25 @@ export function Toggletip({
               <Icon name="close" size="sm" tone="inherit" />
             </button>
           </header>
-          <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-8 py-6">
-            {children}
+          <div className="relative flex flex-col flex-1 min-h-0">
+            {/* The ONE scroller. Focusable, so the keyboard can scroll it
+                (axe: scrollable-region-focusable) — a long serial list must
+                not be pointer-only. */}
+            <div
+              ref={body}
+              tabIndex={0}
+              aria-label={`${title}, scrollable`}
+              onScroll={checkMore}
+              className={cn(
+                'flex-1 min-h-0 overflow-y-auto overscroll-contain px-8 py-6',
+                'outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus-ring',
+              )}
+            >
+              {children}
+            </div>
+            {more ? (
+              <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-12 rounded-b-lg bg-linear-to-t from-surface-default to-transparent" />
+            ) : null}
           </div>
         </div>
       ) : null}

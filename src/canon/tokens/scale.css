@@ -313,9 +313,10 @@
   --zf-chrome-menu-h: 480px;
   /* Toggletip — the click-to-open tooltip that holds a small read-only table
      (an invoice line's bins, batches and serials). Wide enough for three
-     columns at body-sm; capped in height so the panel scrolls, not the page. */
+     columns at body-sm. Capped at 320 so it stays a glance, not a page: past
+     that the body scrolls under a fixed header. */
   --zf-chrome-toggletip: 400px;
-  --zf-chrome-toggletip-h: 440px;
+  --zf-chrome-toggletip-h: 320px;
   --zf-chrome-avatar-sm: 24px;
   --zf-chrome-avatar-md: 40px;
   --zf-chrome-avatar-lg: 60px;
@@ -768,6 +769,11 @@
      tokens in the system so far; a real motion scale is still an open item. */
   --animate-panel-in: zf-panel-in 200ms ease-out;
   --animate-scrim-in: zf-scrim-in 200ms ease-out;
+  /* Button `attention` — a soft primary halo that breathes out and fades, for
+     the one control the user should notice next (Item Details, once its panel
+     is closed). Slow on purpose: 1.8s reads as a hint, faster reads as an alarm.
+     Off under prefers-reduced-motion, where the primary border alone carries it. */
+  --animate-attention: zf-attention 1.8s ease-out infinite;
 
   /* zf-lhs-menu.md — the rail's motion. Figma defines none for this family; §9.2
      adds a width transition and a chevron rotation, and a disclosure that snaps
@@ -823,6 +829,11 @@
 
 @keyframes zf-panel-in { from { transform: translateX(100%); } to { transform: none; } }
 @keyframes zf-scrim-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes zf-attention {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--zf-color-primary-default) 55%, transparent); }
+  70%  { box-shadow: 0 0 0 8px color-mix(in srgb, var(--zf-color-primary-default) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--zf-color-primary-default) 0%, transparent); }
+}
 
 /* The 0fr -> 1fr grid technique: a grid row cannot be animated to `auto`, but it
    can be animated to a fraction, and a single 1fr row in an auto-height grid

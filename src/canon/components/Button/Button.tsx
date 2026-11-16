@@ -226,6 +226,13 @@ interface ButtonBase extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type
    */
   join?: ButtonJoin;
   /**
+   * Draws the eye to this button: a breathing primary halo and a primary
+   * border. For the ONE next step on a screen — e.g. Item Details once its
+   * panel has been closed. Never on more than one button at a time. The halo is
+   * off under prefers-reduced-motion; the border stays.
+   */
+  attention?: boolean;
+  /**
    * The underlying `<button>`. Needed by anything that has to MEASURE this
    * control or hand focus back to it — a `Menu` anchors off its rect and returns
    * focus here on Escape, and neither is possible through props.
@@ -258,6 +265,7 @@ export function Button({
   label,
   type = 'button',
   join,
+  attention,
   ref,
   disabled,
   children,
@@ -288,6 +296,7 @@ export function Button({
         join ? joinRadius[join] : 'rounded-md',
         iconOnly ? iconOnlyWidth[size] : sizeClasses[size],
         look,
+        attention && !disabled && 'border-primary-default animate-attention motion-reduce:animate-none',
         className,
       )}
       {...rest}

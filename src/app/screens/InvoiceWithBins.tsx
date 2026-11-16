@@ -164,7 +164,15 @@ export function InvoiceWithBins({ onCancel, onSaved }: InvoiceWithBinsProps) {
           <ProductTable
             title="Item Table"
             titleTrailing={reopenId ? (
-              <Button emphasis="secondary" size="sm" icon="info" onClick={() => setPanelRow(reopenId)}>Item Details</Button>
+              <Button
+                emphasis="secondary" size="sm" icon="info"
+                //  Glows while the panel is closed — the panel is where the
+                //  bin, batch and serial details live, so it is the next step.
+                attention={!panel}
+                onClick={() => setPanelRow(reopenId)}
+              >
+                Item Details
+              </Button>
             ) : null}
             columns={columns}
             rows={withDerived(rows)}

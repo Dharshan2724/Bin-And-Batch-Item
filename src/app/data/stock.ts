@@ -50,9 +50,19 @@ export const ITEMS: StockItem[] = [
           { number: 'BT-1025-B', bin: 'A1-R2-S4', qty: 1, manufactured: '08 Oct 2026', expiry: '31 Aug 2027' },
         ],
       },
+      //  Many small batches over several bins — the case the popover has to
+      //  scroll for (INV-000008 takes 10 lb from here).
       'Warehouse 2': {
-        bins: [{ bin: 'B2-R1-S1', qty: 5 }],
-        batches: [{ number: 'BT-1025-C', bin: 'B2-R1-S1', qty: 5, manufactured: '20 Oct 2026', expiry: '31 Oct 2027' }],
+        bins: [{ bin: 'B2-R1-S1', qty: 4 }, { bin: 'B2-R1-S2', qty: 3 }, { bin: 'B2-R2-S1', qty: 4 }, { bin: 'B2-R3-S4', qty: 3 }],
+        batches: [
+          { number: 'BT-0725-D', bin: 'B2-R1-S1', qty: 2, manufactured: '02 Jul 2026', expiry: '31 Jan 2027' },
+          { number: 'BT-0825-E', bin: 'B2-R1-S1', qty: 2, manufactured: '06 Aug 2026', expiry: '28 Feb 2027' },
+          { number: 'BT-0825-F', bin: 'B2-R1-S2', qty: 1, manufactured: '19 Aug 2026', expiry: '31 Mar 2027' },
+          { number: 'BT-0925-G', bin: 'B2-R1-S2', qty: 2, manufactured: '03 Sep 2026', expiry: '30 Apr 2027' },
+          { number: 'BT-0925-H', bin: 'B2-R2-S1', qty: 2, manufactured: '17 Sep 2026', expiry: '31 May 2027' },
+          { number: 'BT-1025-C', bin: 'B2-R2-S1', qty: 2, manufactured: '20 Oct 2026', expiry: '31 Oct 2027' },
+          { number: 'BT-1025-J', bin: 'B2-R3-S4', qty: 3, manufactured: '27 Oct 2026', expiry: '30 Nov 2027' },
+        ],
       },
     },
   },
@@ -152,6 +162,7 @@ export interface PastInvoice {
 
 /** Earlier invoices for the item, shown below the current one. */
 export const PAST_INVOICES: PastInvoice[] = [
+  { number: 'INV-000008', date: '03 Nov 2026', status: 'SENT', customer: 'Shopify - Customer', itemId: 'product-2', warehouse: 'Warehouse 2', qty: 10, price: 0, discount: 0 },
   { number: 'INV-000007', date: '28 Oct 2026', status: 'PAID', customer: 'Shopify - Customer', itemId: 'product-2', warehouse: 'Warehouse 1', qty: 2, price: 0, discount: 0 },
   { number: 'INV-000004', date: '14 Oct 2026', status: 'SENT', customer: 'Bluebird Retail', itemId: 'product-2', warehouse: 'Warehouse 2', qty: 1, price: 0, discount: 0 },
   { number: 'INV-000006', date: '22 Oct 2026', status: 'PAID', customer: 'Shopify - Customer', itemId: 'scanner', warehouse: 'Warehouse 1', qty: 2, price: 89, discount: 0 },

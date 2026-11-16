@@ -169,6 +169,16 @@ export const IconOnly: Story = {
  * zf-icons.md §3.3 catalogues, and an 18% span across a three-step ramp reads as
  * drift rather than as a decision. 16 -> 12 is 33% and visible at a glance.
  */
+/** `attention` — the one next step on a screen, e.g. Item Details once its panel is closed. */
+export const Attention: Story = {
+  render: () => (
+    <Inline gap={6} align="center">
+      <Button emphasis="secondary" size="sm" icon="info" attention>Item Details</Button>
+      <Button attention>Primary</Button>
+    </Inline>
+  ),
+};
+
 export const WithIcons: Story = {
   render: () => (
     <Stack gap={6}>

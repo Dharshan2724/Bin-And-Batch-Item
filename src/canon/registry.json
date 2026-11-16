@@ -268,7 +268,8 @@
         "iconRight": "IconName | ReactNode — trailing glyph. A name takes the button's own slot (16/14/12 by size); pass a node to choose the slot yourself, which a dropdown caret needs: size=\"caret\" is 7.5 and no button slot goes below 12",
         "label": "string — REQUIRED when there are no children, or it announces as \"button\"",
         "type": "button · submit · reset. Defaults to \"button\" so it cannot submit a form by accident",
-        "disabled": "boolean — one appearance for all eight intent x emphasis combinations"
+        "disabled": "boolean — one appearance for all eight intent x emphasis combinations",
+        "attention": "boolean — a breathing primary halo for the ONE next step on a screen; off under reduced motion"
       },
       "source": "zf-button.md — 4 Figma sets, 208 variants. Button + Button Icons collapse here (same HTML); Hyperlink and Split Button are separate components. State is native pseudo-classes, not a prop."
     },

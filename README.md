@@ -23,7 +23,10 @@ npm run canon    # → http://localhost:6012 — the canon (Storybook)
 | 4. Other tracking | Pick *Wireless Barcode Scanner* (serial tracked) or *Packing Tape 48mm* (bins only) on a line. The panel opens on that item and the dialog shows serials, or bins only. | `stock.ts` |
 | 5. Past invoices | Earlier invoices below the current one carry their own details. Untick *Show only … transactions* to see other customers'. | `stock.ts` (`PAST_INVOICES`) |
 
-**Item Details** above the item table reopens the panel. Anything outside the flow
+**Item Details** above the item table reopens the panel. While the panel is
+closed, the button glows, so it reads as the next step. For a long list, open
+**INV-000008** (10 lb over 6 batches in 3 bins): the dialog caps at 320px and
+scrolls under a fixed header, with a fade at the bottom while more is below. Anything outside the flow
 raises a *"Not a part of this prototype"* toast.
 
 ## Canon changes
@@ -36,7 +39,14 @@ raises a *"Not a part of this prototype"* toast.
 - **`SidePanel`**: with `modal={false}` the panel now stacks above the TopBar
   and ProductTable's lane controls (`z-150`). Before, the sticky bar covered its
   header.
-- Tokens: `chrome/toggletip` (400) and `chrome/toggletip-h` (440) in `scale.css`.
+- **`Button`** gained `attention`: a breathing primary glow and a primary
+  border, for the one next step on a screen. It's off under reduced motion,
+  where only the border shows. Story: **Button → Attention**.
+- Tokens: `chrome/toggletip` (400) and `chrome/toggletip-h` (320) in
+  `scale.css`; `animate-attention` + `zf-attention` keyframes.
+- `Toggletip` caps its height to the room left in the viewport (it flips
+  above when there's more room there), and its body is the one scroller. The
+  body is keyboard-focusable and shows a fade while more content is below.
 
 ## Versions
 
