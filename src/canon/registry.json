@@ -863,7 +863,7 @@
         "align": "'start' | 'end' (default) — which trigger edge the panel lines up with",
         "open / onOpenChange": "optional controlled state"
       },
-      "source": "Built for the Bin & Batch details at transaction prototype (2026-11-16), from the Item Details → Transactions screenshot. Shares Menu's paint and placement. Admitted at the user's request without the _incoming review step; review at localhost:6006."
+      "source": "Built for the Bin & Batch details at transaction prototype (2026-11-16), from the Item Details → Transactions screenshot. Shares Menu's paint and placement. Admitted at the user's request without the _incoming review step; review at localhost:6012."
     }
   ]
 }

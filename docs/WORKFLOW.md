@@ -64,7 +64,7 @@ component is missing.
   ② registry.json entry, "status": "incoming"
         │
         ▼
-  ③ YOU REVIEW at localhost:6006 — in isolation
+  ③ YOU REVIEW at localhost:6012 — in isolation
         │
         ├── not right ──► iterate on the story, back to ③
         │

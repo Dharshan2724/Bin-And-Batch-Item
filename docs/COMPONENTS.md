@@ -100,4 +100,4 @@ Nothing in these categories yet: `pattern`.
 
 ---
 
-Browse these visually: `npm run canon` → http://localhost:6006
+Browse these visually: `npm run canon` → http://localhost:6012

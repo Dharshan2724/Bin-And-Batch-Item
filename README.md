@@ -10,6 +10,7 @@ New Invoice → Item Details → Transactions screenshot.
 ```bash
 npm install
 npm run dev      # → http://localhost:5182 — opens on Sales → Invoices → New Invoice
+npm run canon    # → http://localhost:6012 — the canon (Storybook)
 ```
 
 ## The flow
@@ -31,7 +32,7 @@ raises a *"Not a part of this prototype"* toast.
   non-modal dialog of read-only detail. It shares Menu's paint and placement.
   Esc and the close glyph return focus to the trigger, and clicking outside
   closes it. Story: **Components/Toggletip**. *Admitted directly, at the user's
-  request, without the `_incoming/` review: review it at `localhost:6006`.*
+  request, without the `_incoming/` review: review it at `localhost:6012`.*
 - **`SidePanel`**: with `modal={false}` the panel now stacks above the TopBar
   and ProductTable's lane controls (`z-150`). Before, the sticky bar covered its
   header.
@@ -52,7 +53,7 @@ with the boundary between them **mechanically enforced**.
 ```bash
 npm install
 npm run dev      # application → http://localhost:5173
-npm run canon    # the canon   → http://localhost:6006
+npm run canon    # the canon   → http://localhost:6012
 ```
 
 ## The two surfaces
@@ -60,7 +61,7 @@ npm run canon    # the canon   → http://localhost:6006
 | Surface | Port | What it is |
 | --- | --- | --- |
 | **Application** | 5173 | Real screens, composed from canon components. Zero styling decisions. |
-| **The canon** | 6006 | Every component in isolation, all states. Where components are reviewed and admitted. |
+| **The canon** | 6012 | Every component in isolation, all states. Where components are reviewed and admitted. |
 
 Both load the same `src/index.css`, so they can never disagree about tokens.
 
@@ -120,7 +121,7 @@ derived from the md. The ingest independently reproduces the Figma audit: 17
 stroked, 34 filled, one stroke weight.
 
 **`StatusBadge` is admitted** — the first of the 24, exported from `@canon` and
-browsable at `localhost:6006` under **Components/StatusBadge**. 28 variants, all
+browsable at `localhost:6012` under **Components/StatusBadge**. 28 variants, all
 28 Light pairings verified against the md's own hexes *and* its stated contrast
 ratios, all 56 pairings passing AA in both panes.
 

@@ -381,7 +381,7 @@ cannot follow the theme.
 1. Build it in `src/canon/_incoming/<Name>/` with `<Name>.tsx` + `<Name>.stories.tsx`.
 2. Add a `registry.json` entry with `"status": "incoming"`.
 3. Do **not** export it from `src/canon/index.ts`.
-4. Stop and tell the user it is ready for review at `localhost:6006`.
+4. Stop and tell the user it is ready for review at `localhost:6012`.
 5. Only once they approve: `git mv` into `components/`, add the export, flip the
    status to `stable`, run `npm run canon:docs`.
 
@@ -443,7 +443,7 @@ rescales without renaming anything.
 | Command | What |
 | --- | --- |
 | `npm run dev` | Application — http://localhost:5173 |
-| `npm run canon` | The canon (browsable components) — http://localhost:6006 |
+| `npm run canon` | The canon (browsable components) — http://localhost:6012 |
 | `npm run check` | Types + the eight boundary rules. Run before claiming done. |
 | `npm run canon:docs` | Regenerate `docs/COMPONENTS.md` from the registry. |
 | `npm run tokens:sync` | Regenerate the five generated token files, verifying all 424 colour values and all 28 badge pairings. |

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "canon": "storybook dev -p 6006 --no-open",
+    "canon": "storybook dev -p 6012 --no-open",
     "build": "npm run check && vite build",
     "preview": "vite preview",
     "check": "tsc -b && node scripts/check-boundaries.mjs",
