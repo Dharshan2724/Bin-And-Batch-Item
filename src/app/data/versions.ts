@@ -30,7 +30,7 @@ export interface PrototypeVersion {
 export const CURRENT_VERSION: string = import.meta.env.VITE_PROTOTYPE_VERSION ?? 'local';
 
 /** Where the recorded versions live, for the local preview to reach them. */
-const LIVE_SITE = 'https://rithika-rajesh-19203.github.io/bin-batch-details-at-transaction/';
+const LIVE_SITE = 'https://rithika-rajesh-19203.github.io/File-12-Bin-batch-details-at-transaction/';
 
 const LOCAL: PrototypeVersion = { id: 'local', label: 'Local preview', note: 'your working copy, not pushed' };
 

@@ -17,5 +17,8 @@ export default defineConfig({
       '@app': path.resolve(root, 'src/app'),
     },
   },
+  //  Relative, so the build works from any folder — GitHub Pages serves it at
+  //  /File-12-Bin-batch-details-at-transaction/<version>/, not at the domain root.
+  base: './',
   server: { port: 5182, strictPort: true, open: false },
 });

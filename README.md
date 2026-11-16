@@ -14,6 +14,8 @@ npm run dev      # → http://localhost:5182 — opens on Sales → Invoices →
 npm run canon    # → http://localhost:6012 — the canon (Storybook)
 ```
 
+Live: https://rithika-rajesh-19203.github.io/File-12-Bin-batch-details-at-transaction/
+
 ## The flow
 
 | Step | What to try | File |

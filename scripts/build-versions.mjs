@@ -73,7 +73,7 @@ writeFileSync(path.join(out, 'index.html'), `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="refresh" content="0; url=./${home}/">
-  <title>Inventory Status</title>
+  <title>Bin &amp; Batch Details</title>
 </head>
 <body><a href="./${home}/">Open the prototype (${home})</a></body>
 </html>
